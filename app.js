@@ -1,3 +1,8 @@
+'use strict';
+
+
+
+var mongoose = require('mongoose')
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,15 +12,20 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var mongooseUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/barter'
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+mongoose.connect(mongooseUrl, function(err){
+  if(err) return console.log('Error connecting to MongoDB: ', err);
+  console.log('Connected to MongoDB: ', mongooseUrl)
+});
+
+
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -28,7 +28,6 @@ function save() {
     .fail(function(err) {
       console.error(err);
       $('#emptyFormWarn').show();
-
     })
   }
   console.log(item);

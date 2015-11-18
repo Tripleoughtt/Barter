@@ -6,8 +6,7 @@ function init() {
   $('#register').on('click', register) 
   $('#registerNewUser').on('click', registerNewUser)
   $('#login').on('click', login) 
-  $('#loginUser').on('click', loginUser)  
-  $('#logout').on('click', logout)
+  $('#loginUser').on('click', loginUser)
 }
 
 var loggedInUser;
@@ -15,10 +14,9 @@ var loggedInUser;
 
 // register new user
 function register() {
-  $('.success').hide();
+  $('.message').hide();
   $('#registration').modal('show');
 }
-
 function registerNewUser() {
   var user = {};
   user.username = $('#username').val();
@@ -27,11 +25,11 @@ function registerNewUser() {
 
   if (user.username === '' || user.password === '') {
     $('.message').hide();
-    clearForm();
+    $('input').val('');
     $('#registerEmptyFormWarn').show();
   } else if (user.password !== confirmPassword) {
     $('.message').hide();
-    clearForm();
+    $('input').val('');
     $('#passwordMatchWarn').show();
   } else {
     $('.message').hide();
@@ -41,7 +39,7 @@ function registerNewUser() {
       setTimeout(function() {
         $('#registration').modal('hide')
       }, 1500)
-      clearForm();
+      $('input').val('');
     })
     .fail(function(err) {
       console.error(err);
@@ -49,19 +47,14 @@ function registerNewUser() {
   }
 }
 
-function clearForm() {
-  $('#username').val('');
-  $('#password').val('');
-  $('#confirmPassword').val('');
-  $('#loginUsername').val('');
-  $('#loginPassword').val('');
-}
+
 
 // login user
 function login() {
   $('.message').hide();
   $('#loginUser').modal('show');
 }
+
 function loginUser() {
   var user = {};
   user.username = $('#loginUsername').val();
@@ -73,7 +66,7 @@ function loginUser() {
     .done(function(user) {
       loggedInUser = user;
       $('#loginUser').modal('hide');
-      clearForm();
+      $('input').val('');
       fillCustomProfile(loggedInUser);
     })
     .fail(function(err) {
@@ -83,32 +76,3 @@ function loginUser() {
     });
   }
 }
-
-// logout user
-
-
-
-// // check if user is already logged in
-// if (document.cookie) {
-//   var cookies = document.cookie;
-//   $.get('/users/login', 'testing')
-//   .done(function(user) {
-//     console.log('main.js ', user);
-//     // loggedInUser = user;
-//     // fillCustomProfile(loggedInUser);
-//   })
-//   .fail(function(err) {
-//     console.error(err);
-//   });
-// }
-
-// function fillCustomProfile(user) {
-//   $('#logout').show();
-//   $('#register').hide();
-//   $('#login').text('Welcome ' + loggedInUser.username);
-//   $('#viewProfile').show();
-// }
-
-// register new user
-
-

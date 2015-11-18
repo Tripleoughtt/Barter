@@ -6,6 +6,24 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.redirect('/')
+})
+
+router.post('/login', function(req, res){
+  User.authenticate(req.body, function(err, user){
+    if(err || !user) res.status(400).send(err);
+    else {
+    console.log ('Success!');
+    
+    var token = user.token(user);
+    res.cookie('token', token);
+    res.status(err ? 400 : 200).send(err || {user: user, token: token})
+    }
+  })
+});
+
 router.post('/register', function(req, res){
   console.log('Hello Registration')
   User.register(req.body, function(err, savedUser){

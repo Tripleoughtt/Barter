@@ -2,7 +2,6 @@
 
 $(document).ready(init);
 
-
 function init() {
   $('#register').on('click', register) 
   $('#registerNewUser').on('click', registerNewUser)
@@ -13,28 +12,6 @@ function init() {
 
 var loggedInUser;
 
-
-
-// // check if user is already logged in
-// if (document.cookie) {
-//   var cookies = document.cookie;
-//   $.get('/users/login', 'testing')
-//   .done(function(user) {
-//     console.log('main.js ', user);
-//     // loggedInUser = user;
-//     // fillCustomProfile(loggedInUser);
-//   })
-//   .fail(function(err) {
-//     console.error(err);
-//   });
-// }
-
-// function fillCustomProfile(user) {
-//   $('#logout').show();
-//   $('#register').hide();
-//   $('#login').text('Welcome ' + loggedInUser.username);
-//   $('#viewProfile').show();
-// }
 
 // register new user
 function register() {
@@ -107,8 +84,6 @@ function loginUser() {
   }
 }
 
-
-
 // logout user
 function logout() {
   $.post('/users/logout')
@@ -121,5 +96,27 @@ function logout() {
 }
 
 
+// // check if user is already logged in
+// if (document.cookie) {
+//   var cookies = document.cookie;
+//   $.get('/users/login', 'testing')
+//   .done(function(user) {
+//     console.log('main.js ', user);
+//     // loggedInUser = user;
+//     // fillCustomProfile(loggedInUser);
+//   })
+//   .fail(function(err) {
+//     console.error(err);
+//   });
+// }
+
+// function fillCustomProfile(user) {
+//   $('#logout').show();
+//   $('#register').hide();
+//   $('#login').text('Welcome ' + loggedInUser.username);
+//   $('#viewProfile').show();
+// }
+
+// register new user
 
 

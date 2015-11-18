@@ -85,15 +85,7 @@ function loginUser() {
 }
 
 // logout user
-function logout() {
-  $.post('/users/logout')
-  .done(function() {
-    $('#viewProfile').hide();
-    $('#register').show();
-    $('#logout').hide();
-    $('#login').text('Login');
-  });
-}
+
 
 
 // // check if user is already logged in

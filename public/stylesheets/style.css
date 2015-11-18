@@ -1,8 +1,79 @@
-body {
+/*body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+*/
+body {
+  background-color: #191d21;
+  color: #67c2db;
+  text-align: center;
+  font-size: 16px;
+}
 
-a {
-  color: #00B7FF;
+.btn {
+  margin: 10px 10px 0 10px;
+}
+
+.message, #logout {
+  text-align: center;
+  display: none;
+}
+
+textarea {
+  min-height: 300px;
+}
+
+.warning {
+  font-size: 12px;
+  color: #d68539;
+} 
+
+#success {
+  font-size: 25px;
+  color: #55aa67;
+}
+
+#clearFooter {
+  clear: both;
+  height: 50px;
+}
+
+.field {
+  font-weight: bold;
+  text-align: right;
+  margin: 10px 0px 10px 0;
+  vertical-align: center;
+}
+.content {
+  margin: 10px auto 10px 0;
+  text-align: left;
+}
+
+/*sticky footer*/
+html, body {
+  height: 100%;
+}
+.container {
+  min-height: 100%;
+}
+.container:after {
+  content: '';
+  display: block;
+}
+#footer {
+  height: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 150;
+}
+#test {
+  border-radius: 10px 10px 0 0 ;
+  background-color: black;
+  opacity: 0.5;
+}
+img {
+  text-align: left;
+  height: 100px;
+  padding: 10px;
 }

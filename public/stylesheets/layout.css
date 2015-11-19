@@ -10,8 +10,7 @@ body {
 }
 
 
-
-/*sticky footer*/
+/*sticky footer - did not have a chance to implement this
 #clearFooter {
   clear: both;
   height: 50px;
@@ -42,4 +41,4 @@ img {
   text-align: left;
   height: 100px;
   padding: 10px;
-}
+}*/

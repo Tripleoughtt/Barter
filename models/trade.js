@@ -20,7 +20,7 @@ tradeSchema.statics.newTrade = (req, cb) => {
   let trade = new Trade();
   let tradeInfo = req.body
   let payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
-  console.log(payload._id)
+  console.log('newTrade id', payload._id)
   User.find({"username": tradeInfo.respondingUser}, function(err, respondingUser){
     trade.respondingUser = respondingUser[0]._id;
     trade.requestingUser = payload._id;
@@ -30,7 +30,7 @@ tradeSchema.statics.newTrade = (req, cb) => {
       Item.find({owner: trade.respondingUser, itemName: tradeInfo.requestedItem}, function(err, desiredItem){
         trade.requestedItem = desiredItem[0]._id;
         trade.save((err, savedTrade) => {
-          console.log(savedTrade);
+          console.log('model newTrade saved Trade ', savedTrade);
         })
       })
     })

@@ -35,6 +35,7 @@ router.post('/newTrade', (req, res) => {
   Trade.newTrade(req, function(err, savedTrade) {
     if (err) return console.error(err);
     console.log(savedTrade);
+    res.send(savedTrade)
   })
 })
 
@@ -52,6 +53,21 @@ router.post('/makeTrade', (req, res) => {
   }) 
 })
 
+router.post('/notForTrade', (req, res) => {
+  // console.log(req.body);
+  var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET);
+  // console.log(payload);
+  Item.find({itemName: req.body.itemName, owner: payload._id}, (err, foundItem) => {
+    if (err) return console.error(err);
+    // console.log(foundItem)
+    Item.findByIdAndUpdate(foundItem[0]._id, {$set: {forTrade: !foundItem[0].forTrade}}, (err, updatedStatus) => {
+      if (err) return console.error(err);
+      // console.log('foundItems for trade status ', updatedStatus);      
+      res.send(updatedStatus);
+    })
+  })
+})
+
 router.post('/deleteTrade', (req, res) => {
   Trade.findByIdAndRemove(req.body._id, (err, removedTrade) => {
     res.send(removedTrade)
@@ -63,9 +79,10 @@ router.post('/removeItem', (req, res) => {
   console.log(req.body)
   var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
   Item.find({owner: payload._id, itemName: req.body.itemName}, (err, foundItem) => {
-    console.log(foundItem)
+    console.log('found items: ', foundItem)
     Item.findByIdAndRemove(foundItem[0]._id, (err, removedItem) => {
       console.log(removedItem)
+      res.send(removedItem);
     })
   })
 })

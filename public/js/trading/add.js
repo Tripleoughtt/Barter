@@ -24,8 +24,27 @@ function saveNewItem() {
     $('input').val('');
     $('.message').hide();
     $.post('trading/addItem', item)
-    .done(function(done) {
-      console.log('new item saved');
+    .done(function(savedItem) {
+      console.log('new item saved ', savedItem);
+
+      var $tr = $('<tr>')
+
+      var $myItem = $('<div>').addClass('myItem').text(savedItem.itemName);
+      var $item = $('<div>').addClass('item').append($myItem);
+      var $itemTd = $('<td>').append($item);
+
+      var $trash = $('<i>').addClass('fa fa-trash fa-md deleteItem');
+      var $trashTd = $('<td>').append($trash);
+
+      var $offer = $('<input>').addClass('offer').attr('type', 'radio').attr('name', 'offer');
+      var $offerTd = $('<td>').append($offer);
+
+      var $forTrade = $('<input>').addClass('forTrade').attr('type', 'checkbox').attr('checked', 'true');
+      var $forTradeTd = $('<td>').append($forTrade);
+
+      $tr.append($itemTd, $forTradeTd, $offerTd, $trashTd);
+      $('#myItemsTable').prepend($tr);
+
       $('#addModal').modal('hide');
     })
     .fail(function(err) {
@@ -34,3 +53,9 @@ function saveNewItem() {
     })
   }
 }
+
+
+
+
+
+

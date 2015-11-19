@@ -8,4 +8,5 @@ block content
   img#error(src="/media/error.jpg")
   h1= message
   h2= error.status
-  pre #{error.stack}
+  .col-md-8.col-md-offset-2
+    pre #{error.stack}

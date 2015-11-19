@@ -1,12 +1,19 @@
 block my trades
   .row
     h3.col-md-12 My Items
+    h4.col-md-12 Select an Item to Offer for Trade!
   .row
     table.table.table-striped.table-hover.table-condensed.table-responsive
       tr
         th.col-md-6 Item
-        th.col-md-6.pull-right for trade?
-        th.
-      tr
-        td littleFinger
-        td 
+        th.col-md-6.pull-right Offer Item!
+        
+          
+      if data.myItems
+        each item in data.myItems
+          tr
+            td.item
+              h4= item.itemName
+            td.pull-right  
+              .btn.forTrade
+                input(type="checkbox") 

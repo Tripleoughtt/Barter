@@ -22,8 +22,6 @@ block content
   include add
   include pending
   include profile
-  //- include my-items
-  //- include public-items
 
   .container
     .row
@@ -32,8 +30,7 @@ block content
           include myTrades
       #publicItems.col-md-6
         .well
-          .row
-            h3.col-md-12 Public Items
+          include publicTrades
 block js
   script(src='js/trading/trading.js')
   script(src='js/trading/pending.js')

@@ -1,0 +1,9 @@
+.item {
+  text-align: left;
+
+}
+
+.pull-right > .btn.forTrade {
+  margin: 0px;
+  padding: 0px;
+}

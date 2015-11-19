@@ -9,7 +9,25 @@ var Item = require('../models/item');
 var Trade = require('../models/trade');
 
 router.get('/', function(req, res, next) {
-  res.render('trading/trading');
+  var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
+  console.log(payload)
+  var data = {}
+
+  Item.find({owner: payload._id}, (err, myItems) => {
+      // console.log(myItems)
+      data.myItems = myItems;
+      Item.find({forTrade: true , owner: {$ne : payload._id}}, (err, publicItems) => {
+        // console.log(publicItems)
+        data.publicItems = publicItems;
+        Trade.find({$or: [{requestingUser: payload._id},
+        {respondingUser: payload._id}]}, (err, pendingTrades) => {
+          // console.log('Pending Trades: ', pendingTrades);
+          data.pendingTrades = pendingTrades
+          console.log(data)
+          res.render('trading/trading', {data: data});
+        })
+      })
+  })
 });
 
 router.post('/newTrade', (req, res) => {

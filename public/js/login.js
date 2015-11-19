@@ -12,9 +12,6 @@ function init() {
 
 var loggedInUser;
 
-
-
-
 // register new user
 function register() {
   $('.message').hide();
@@ -52,8 +49,6 @@ function registerNewUser() {
   }
 }
 
-
-
 // login user
 function login() {
   $('.message').hide();
@@ -83,7 +78,6 @@ function loginUser() {
     });
   }
 }
-
 
 function cancel() {
   $('input').val('');

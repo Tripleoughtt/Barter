@@ -13,25 +13,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/newTrade', (req, res) => {
-  var trade = new Trade();
-  var tradeInfo = req.body.trade
-  var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
-  User.find({"username": tradeInfo.respondingUser}, function(err, respondingUser){
-    trade.respondingUser = respondingUser[0]._id;
-    trade.requestingUser = payload._id;
-
-    Item.find({owner: trade.requestingUser, itemName: tradeInfo.offeredItem}, function(err, itemForTrade){
-      trade.responseItem = (itemForTrade[0]._id);
-
-      Item.find({owner: trade.respondingUser, itemName: tradeInfo.requestedItem}, function(err, desiredItem){
-        console.log(desiredItem)
-        trade.requestedItem = desiredItem[0]._id;
-        console.log(trade)
-        trade.save((err, savedTrade) => {
-          console.log(savedTrade);
-        })
-      })
-    })
+  Trade.newTrade(req, function(err, savedTrade) {
+    if (err) return console.error(err);
+    console.log(savedTrade);
   })
 })
 

@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
-  res.redirect('/');
+  res.send({redirect: '/'});
 })
 
 router.post('/login', function(req, res){

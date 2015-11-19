@@ -1,17 +1,19 @@
 block public trades
   .row
-    h3.col-md-12 My Items
+    h3.col-md-12 Publicly Traded Items!
     h4 select one item to trade for
   .row
     table.table.table-striped.table-hover.table-condensed.table-responsive
       tr
-        th.col-md-6 Item
-        th.col-md-6.pull-right Request Item?
+        th.col-md-4 Item
+        th.col-md-4 User
+        th.col-md-4.pull-right Request Item?
       if data.publicItems
         each item in data.publicItems
-          tr
+          tr(data-user=data)
             td.item
               h4= item.itemName
+
             td.pull-right  
               .btn.forTrade
-                input(type="checkbox") 
+                input.request(type="radio" name="request") 

@@ -3,16 +3,16 @@
 var express = require('express');
 var router = express.Router();
 var jwt = require('jwt-simple')
-
+var authMiddleware = require('../config/auth')
 var User = require('../models/user');
 var Item = require('../models/item');
 var Trade = require('../models/trade');
 
-router.get('/', function(req, res, next) {
+router.get('/', authMiddleware, function(req, res, next) {
   var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
   console.log(payload)
   var data = {}
-
+  data.currentUser = payload.username
   Item.find({owner: payload._id}, (err, myItems) => {
       // console.log(myItems)
       data.myItems = myItems;
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
           data.pendingTrades = pendingTrades
           console.log(data)
           res.render('trading/trading', {data: data});
-        })
+        }).populate('requestingUser respondingUser requestedItem responseItem', "username itemName")
       })
   })
 });
@@ -57,7 +57,7 @@ router.post('/addItem', (req, res) => {
   var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
   console.log(payload.username)
   Item.find({itemName: req.body.name, owner: payload._id}, (err, item) => {
-    if (err || item) return res.send(err || 'you already own this item')
+    if (err || item[0]) return res.send(err || 'you already own this item')
   })
   item.owner = payload._id
   item.itemName = req.body.name

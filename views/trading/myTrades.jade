@@ -1,7 +1,12 @@
 block my trades
   .row
-    h3.col-md-12 My Items
-    h4.col-md-12 Select an Item to Offer for Trade!
+    .col-md-9
+      .row
+        h3.col-md-12 My Items
+      h4.col-md-12 Select an Item to Offer for Trade!
+    .col-md-2
+    .row
+      button(disabled).btn.btn-responsive.btn-info#trade Traaaaade!!!
   .row
     table.table.table-striped.table-hover.table-condensed.table-responsive
       tr
@@ -16,4 +21,5 @@ block my trades
               h4= item.itemName
             td.pull-right  
               .btn.forTrade
-                input(type="checkbox") 
+                input.offer(type="radio" name="offer") 
+

@@ -1,12 +1,8 @@
 {
   "name": "barter",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node app.js",
-    "postinstall": "bower i",
-    "setup": "npm i && bower i"
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "~1.13.2",
     "bower": "^1.6.5",
@@ -19,5 +15,19 @@
     "mongoose": "^4.2.6",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
-  }
-
+},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tripleoughtt/Barter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tripleoughtt/Barter/issues"
+  },
+  "homepage": "https://github.com/Tripleoughtt/Barter#readme"
+}

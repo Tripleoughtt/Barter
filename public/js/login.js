@@ -7,9 +7,12 @@ function init() {
   $('#registerNewUser').on('click', registerNewUser)
   $('#login').on('click', login) 
   $('#loginUser').on('click', loginUser)
+  $('.cancel').on('click', cancel);
 }
 
 var loggedInUser;
+
+
 
 
 // register new user
@@ -20,7 +23,7 @@ function register() {
 function registerNewUser() {
   var user = {};
   user.username = $('#username').val();
-  user.email= $('#email').val();
+  user.email = $('#email').val();
   user.password = $('#password').val();
   var confirmPassword = $('#confirmPassword').val();
 
@@ -34,7 +37,6 @@ function registerNewUser() {
     $('#passwordMatchWarn').show();
   } else {
     $('.message').hide();
-    console.log(user)
     $.post('/register', user)
     .done(function(registeredUser) {
       $('#success').show();
@@ -45,6 +47,7 @@ function registerNewUser() {
     })
     .fail(function(err) {
       console.error(err);
+      $('#tryAgain').show();
     });
   }
 }
@@ -65,17 +68,26 @@ function loginUser() {
     $('#loginEmptyFormWarn').show();
   } else {
     $.post('/login', user)
-    .done(function(user) {
-      loggedInUser = user;
+    .done(function(data) {
+      if (data.redirect) {
+        window.location = data.redirect
+      }
       $('#loginUser').modal('hide');
       $('input').val('');
-      console.log(user)
-      //fillCustomProfile(loggedInUser);
     })
     .fail(function(err) {
       $('#username').val('');
       $('#password').val('');
       console.error(err);
+      $('#tryAgain').show();
     });
   }
+}
+
+
+function cancel() {
+  $('input').val('');
+  $('.message').hide();
+  $('#editBio').hide();
+  $('.modal').modal('hide');
 }

@@ -15,21 +15,22 @@ function openAddModal() {
 function saveNewItem() {
   var item = {};
   item.name = $('#itemName').val(); 
-  item.description = $('#itemDescription').val(); 
-  if (item.name === '' || item.description === '') {
+  // itemInfo.item.description = $('#itemDescription').val(); 
+  console.log(item);
+  if (item.name === '') {
     $('.message').hide();
     $('#emptyFormWarn').show();
   } else {
     $('input').val('');
     $('.message').hide();
-    $.post('/addItem', item)
+    $.post('trading/addItem', item)
     .done(function(done) {
       console.log('new item saved');
+      $('#addModal').modal('hide');
     })
     .fail(function(err) {
       console.error(err);
       $('#emptyFormWarn').show();
     })
   }
-  console.log(item);
 }

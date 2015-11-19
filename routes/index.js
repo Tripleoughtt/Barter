@@ -1,16 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user')
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-
-
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
-  res.redirect('/')
+  res.redirect('/');
 })
 
 router.post('/login', function(req, res){
@@ -21,7 +19,7 @@ router.post('/login', function(req, res){
     
     var token = user.token(user);
     res.cookie('token', token);
-    res.redirect('/trading')
+    res.send({redirect: '/trading'})
     }
   })
 });

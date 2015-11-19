@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/newTrade', (req, res) => {
   var trade = new Trade();
   var tradeInfo = req.body.trade
-  var payload = jwt.decode(req.body.token, process.env.JWT_SECRET)
+  var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
   User.find({"username": tradeInfo.respondingUser}, function(err, respondingUser){
     trade.respondingUser = respondingUser[0]._id;
     trade.requestingUser = payload._id;
@@ -38,10 +38,10 @@ router.post('/newTrade', (req, res) => {
 router.post('/addItem', (req, res) => {
   var item = new Item(req.body.item);
   console.log(item)
-  var payload = jwt.decode(req.body.token, process.env.JWT_SECRET)
+  var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
   console.log(payload.username)
   item.owner = payload._id
-  item.itemName = req.body.item.name
+  item.itemName = req.body.name
   console.log(payload._id)
   item.save(function(err, savedItem){
     if(err) return console.log(err)

@@ -11,8 +11,6 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var User;
 
-
-
 var userSchema = Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },

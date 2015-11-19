@@ -19,11 +19,28 @@ router.post('/newTrade', (req, res) => {
   })
 })
 
+router.post('/makeTrade', (req, res) => {
+  Trade.findById(req.body._id, (err, trade) => {
+    trade.makeTrade(trade, (err, tradeComplete) => {
+      if (err) return console.error(err);
+      console.log(tradeComplete);
+      Trade.findByIdAndRemove(req.body._id), (err, removedTrade) => {
+        if (err) return console.error(err);
+        console.log(removedTrade);
+        res.send(tradeComplete)
+      }
+    })
+  }) 
+})
+
 router.post('/addItem', (req, res) => {
   var item = new Item(req.body.item);
   console.log(item)
   var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
   console.log(payload.username)
+  Item.find({itemName: req.body.name, owner: payload._id}, (err, item) => {
+    if (err || item) return res.send(err || 'you already own this item')
+  })
   item.owner = payload._id
   item.itemName = req.body.name
   console.log(payload._id)

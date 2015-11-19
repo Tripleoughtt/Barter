@@ -6,6 +6,17 @@ function init() {
   $('.cancel').on('click', cancel);
   $('#logout').on('click', logout);
   $('#trade').on('click', tradeInit);
+  $('.acceptTrade').on('click', acceptTrade)
+  $('.cancelTrade').on('click', cancelTrade)
+  $('.deleteItem').on('click', removeItem)
+}
+
+function removeItem(){
+  var itemName = ($(this).closest('tr').find('.myItem').text())
+  $.post('/trading/removeItem', {itemName: itemName})
+  .done(function(data){
+    console.log(data)
+  })
 }
 
 function cancel() {
@@ -16,10 +27,40 @@ function cancel() {
 }
 
 function tradeInit() {
-  if ($('.request:checked') && $('.offer:checked')){
-    
-  }
+  var data = {};
+  data.requestedItem = $('.request:checked').closest('tr').find('.publicItemName').text();
+  data.respondingUser = $('.request:checked').closest('tr').find('.publicItemOwner').text();
+  data.offeredItem = $('.offer:checked').closest('tr').find('.myItem').text();
+  console.log(data);
+  $.post('/trading/newTrade', data)
+  .done(function(tradeComplete){
+    console.log(tradeComplete)
+  })
+  .fail(function(err){
+    console.error(err);
+  })
 };
+
+function cancelTrade(){
+  var data = {_id: $(this).attr('id')}
+  $.ajax({
+    type: "POST",
+    url: '/trading/deleteTrade',
+    data: data
+  })
+  .done(function(data){
+    console.log(data)
+  })
+}
+
+function acceptTrade(){
+  var id = ($(this).attr('id'));
+  var data = {_id: id};
+  $.post('/trading/makeTrade', data)
+  .done(function(data){
+    console.log(data)
+  })
+}
 
 function logout() {
   $.post('/logout')
@@ -27,10 +68,6 @@ function logout() {
     if(data.redirect){
       window.location = data.redirect
     }
-    // $('#viewProfile').hide();
-    // $('#register').show();
-    // $('#logout').hide();
-    // $('#login').text('Login');
   });
 }
 

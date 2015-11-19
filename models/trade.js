@@ -16,21 +16,19 @@ let tradeSchema = mongoose.Schema({
 });
 
 tradeSchema.statics.newTrade = (req, cb) => {
+  console.log("Trade info: ", req.body)
   let trade = new Trade();
-  let tradeInfo = req.body.trade
-  let payload = jwt.decode(req.body.token, process.env.JWT_SECRET)
+  let tradeInfo = req.body
+  let payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
+  console.log(payload._id)
   User.find({"username": tradeInfo.respondingUser}, function(err, respondingUser){
     trade.respondingUser = respondingUser[0]._id;
     trade.requestingUser = payload._id;
-    console.log('trade again', trade);
-
     Item.find({owner: trade.requestingUser, itemName: tradeInfo.offeredItem}, function(err, itemForTrade){
       trade.responseItem = (itemForTrade[0]._id);
 
       Item.find({owner: trade.respondingUser, itemName: tradeInfo.requestedItem}, function(err, desiredItem){
-        console.log(desiredItem)
         trade.requestedItem = desiredItem[0]._id;
-        console.log(trade)
         trade.save((err, savedTrade) => {
           console.log(savedTrade);
         })

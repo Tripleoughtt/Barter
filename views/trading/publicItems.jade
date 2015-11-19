@@ -1,4 +1,4 @@
-block public trades
+block public items
   .row
     h3.col-md-12 Publicly Traded Items!
     h4 select one item to trade for
@@ -12,8 +12,9 @@ block public trades
         each item in data.publicItems
           tr(data-user=data)
             td.item
-              h4= item.itemName
-
+              h4.publicItemName= item.itemName
+            td
+              h4.publicItemOwner= item.owner.username
             td.pull-right  
               .btn.forTrade
                 input.request(type="radio" name="request") 

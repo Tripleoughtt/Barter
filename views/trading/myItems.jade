@@ -1,4 +1,4 @@
-block my trades
+block my items
   .row
     .col-md-9
       .row
@@ -18,8 +18,9 @@ block my trades
         each item in data.myItems
           tr
             td.item
-              h4= item.itemName
-            td.pull-right  
+              h4.myItem= item.itemName
+            td.pull-right
+              i.fa.fa-trash.fa-md.deleteItem  
               .btn.forTrade
                 input.offer(type="radio" name="offer") 
 

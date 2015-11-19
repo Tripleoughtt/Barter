@@ -26,11 +26,12 @@ router.get('/', authMiddleware, function(req, res, next) {
           console.log(data)
           res.render('trading/trading', {data: data});
         }).populate('requestingUser respondingUser requestedItem responseItem', "username itemName")
-      })
+      }).populate('owner', 'username')
   })
 });
 
 router.post('/newTrade', (req, res) => {
+  console.log(req.body)
   Trade.newTrade(req, function(err, savedTrade) {
     if (err) return console.error(err);
     console.log(savedTrade);
@@ -42,13 +43,31 @@ router.post('/makeTrade', (req, res) => {
     trade.makeTrade(trade, (err, tradeComplete) => {
       if (err) return console.error(err);
       console.log(tradeComplete);
-      Trade.findByIdAndRemove(req.body._id), (err, removedTrade) => {
+      Trade.findByIdAndRemove(req.body._id, (err, removedTrade) => {
         if (err) return console.error(err);
         console.log(removedTrade);
         res.send(tradeComplete)
-      }
+      })
     })
   }) 
+})
+
+router.post('/deleteTrade', (req, res) => {
+  Trade.findByIdAndRemove(req.body._id, (err, removedTrade) => {
+    res.send(removedTrade)
+  })
+})
+
+router.post('/removeItem', (req, res) => {
+  console.log(req.cookies)
+  console.log(req.body)
+  var payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
+  Item.find({owner: payload._id, itemName: req.body.itemName}, (err, foundItem) => {
+    console.log(foundItem)
+    Item.findByIdAndRemove(foundItem[0]._id, (err, removedItem) => {
+      console.log(removedItem)
+    })
+  })
 })
 
 router.post('/addItem', (req, res) => {

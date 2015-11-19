@@ -4,14 +4,15 @@ $(document).ready(init);
 
 function init() {
   $('#add').on('click', openAddModal);
-  $('#saveNewItem').on('click', save);
+  $('#saveNewItem').on('click', saveNewItem);
 }
 
 function openAddModal() {
+  console.log('add modal clicked')
   $('#addModal').modal('show');
 }
 
-function save() {
+function saveNewItem() {
   var item = {};
   item.name = $('#itemName').val(); 
   item.description = $('#itemDescription').val(); 
@@ -21,7 +22,7 @@ function save() {
   } else {
     $('input').val('');
     $('.message').hide();
-    $.post('/addItem')
+    $.post('/addItem', item)
     .done(function(done) {
       console.log('new item saved');
     })

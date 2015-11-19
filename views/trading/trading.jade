@@ -1,10 +1,12 @@
-extends ./add.jade
-extends ./profile.jade
-//- extends ./layout.jade
-//- extends ./layout.jade
+extends ../layout.jade
+//- extends ./pending.jade
+//- extends ./profile.jade
 
 block css
   link(rel='stylesheet', href="stylesheets/trading/trading.css")
+  link(rel='stylesheet', href="stylesheets/trading/add.css")
+  link(rel='stylesheet', href="stylesheets/trading/pending.css")
+  link(rel='stylesheet', href="stylesheets/trading/profile.css")
 
 block nav 
   li 
@@ -17,11 +19,11 @@ block nav
     #logout.btn.btn-info.btn-responsive(type='submit') Logout
 
 block content
-  block add modal
-  block pending modal
-  block profile modal
-  //- block my items
-  //- block public items
+  include add
+  include pending
+  include profile
+  //- include my-items
+  //- include public-items
 
   .container
     .row
@@ -38,6 +40,8 @@ block content
         .well
           .row
             h3.col-md-12 Public Items
-
 block js
   script(src='js/trading/trading.js')
+  script(src='js/trading/pending.js')
+  script(src='js/trading/profile.js')
+  script(src='js/trading/add.js')

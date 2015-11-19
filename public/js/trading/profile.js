@@ -4,31 +4,28 @@ $(document).ready(init);
 
 function init() {
   $('#profile').on('click', openProfileModal);
-  $('')
+  $('#edit').on('click', editBio);
+  $('#sameBioEdit').on('click', saveBioEdit);
 }
 
 function openProfileModal() {
+  console.log('profile clicked');
   $('#profileModal').modal('show');
 }
 
-// function save() {
-//   var item = {};
-//   item.name = $('#itemName').val(); 
-//   item.description = $('#itemDescription').val(); 
-//   if (item.name === '' || item.description === '') {
-//     $('.message').hide();
-//     $('#emptyFormWarn').show();
-//   } else {
-//     $('input').val('');
-//     $('.message').hide();
-//     $.post('/addItem')
-//     .done(function(done) {
-//       console.log('new item saved');
-//     })
-//     .fail(function(err) {
-//       console.error(err);
-//       $('#emptyFormWarn').show();
-//     })
-//   }
-//   console.log(item);
-// }
+function editBio() {
+  $('#bio').hide();
+  $('#editBio').show();
+}
+
+function saveBioEdit() {
+  var bio = $('#editBio').val(); 
+  $.post('/userProfile', bio)
+  .done(function(done) {
+    console.log('profile updated');
+  })
+  .fail(function(err) {
+    console.error(err);
+    $('#emptyFormWarn').show();
+  })
+}

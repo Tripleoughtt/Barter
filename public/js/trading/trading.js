@@ -4,12 +4,12 @@ $(document).ready(init);
 
 function init() {
   $('.cancel').on('click', cancel);
-  $('#saveNewItem').on('click', save);
 }
 
 function cancel() {
   $('input').val('');
   $('.message').hide();
+  $('#editBio').hide();
   $('.modal').modal('hide');
 }
 

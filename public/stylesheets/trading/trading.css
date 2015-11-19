@@ -1,0 +1,19 @@
+textarea {
+  min-height: 300px;
+}
+h3 {
+  margin: 10px;
+}
+
+.well {
+  min-height: 80vh;
+}
+
+.message {
+  display: none;
+}
+
+.warning {
+  font-size: 12px;
+  color: #d68539;
+} 

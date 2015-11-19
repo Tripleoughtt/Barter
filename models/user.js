@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 var jwt = require('jwt-simple');
 
 //Requiring Registration email dependencies
-var api_key = 'xxxxx';
-var domain = 'xxxxx';
+var api_key = 'key-acd11a66f6a29644069caf837c6a09a1';
+var domain = 'rgautereaux.com';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var User;

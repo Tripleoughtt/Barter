@@ -3,8 +3,10 @@ var router = express.Router();
 var User = require('../models/user')
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('login');
 });
+
+
 
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
@@ -19,7 +21,7 @@ router.post('/login', function(req, res){
     
     var token = user.token(user);
     res.cookie('token', token);
-    res.status(err ? 400 : 200).send(err || {user: user, token: token})
+    res.redirect('/trading')
     }
   })
 });

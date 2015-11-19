@@ -8,6 +8,10 @@ var User = require('../models/user');
 var Item = require('../models/item');
 var Trade = require('../models/trade');
 
+router.get('/', function(req, res, next) {
+  res.render('trading/trading');
+});
+
 router.post('/newTrade', (req, res) => {
   var trade = new Trade();
   var tradeInfo = req.body.trade

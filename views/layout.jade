@@ -1,7 +1,35 @@
 doctype html
-html
+html(lang="en")
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Bitchin' Barterin'
+    link(rel='stylesheet', href="bower_components/bootswatch/darkly/bootstrap.min.css")
+    //- link(rel='stylesheet', href="bower_components/font-awesome/css/font-awesome.min.css")
+    link(rel='stylesheet', href="stylesheets/layout.css")
+    block css
   body
+    nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#nav-collapse', aria-expanded='false')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #nav-collapse.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            block nav    
     block content
+      .footer
+        #clearFooter
+        #footer.row
+          .container
+            #test.col-xs-12
+              .col-xs-6.pull-left
+                img.pull-left(src='/media/website-logo.png', alt='personal logo')
+              //- didn't have enough time to set this up
+              //- i.fa.fa-linkedin-square
+              //- i.fa.fa-github-square
+              //- i.fa.fa-twitter-square
+    script(src='bower_components/jquery/dist/jquery.min.js')
+    script(src='bower_components/bootstrap/js/modal.js')
+    block js

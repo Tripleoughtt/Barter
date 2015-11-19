@@ -1,0 +1,47 @@
+extends ../layout.jade
+//- extends ./pending.jade
+//- extends ./profile.jade
+
+block css
+  link(rel='stylesheet', href="stylesheets/trading/trading.css")
+  link(rel='stylesheet', href="stylesheets/trading/add.css")
+  link(rel='stylesheet', href="stylesheets/trading/pending.css")
+  link(rel='stylesheet', href="stylesheets/trading/profile.css")
+
+block nav 
+  li 
+    #add.btn.btn-info.btn-responsive(type='submit') Add Item
+  li
+    #pending.btn.btn-info.btn-responsive(type='submit') Pending Trades
+  li
+    #profile.btn.btn-info.btn-responsive(type='submit') Profile
+  li
+    #logout.btn.btn-info.btn-responsive(type='submit') Logout
+
+block content
+  include add
+  include pending
+  include profile
+  //- include my-items
+  //- include public-items
+
+  .container
+    .row
+      #myItems.col-md-6
+        .well
+          .row
+            h3.col-md-12 My Items
+          .row
+            img#gravatar.col-md-4
+            #buttons.col-md-8
+              .row
+                #editBio
+      #publicItems.col-md-6
+        .well
+          .row
+            h3.col-md-12 Public Items
+block js
+  script(src='js/trading/trading.js')
+  script(src='js/trading/pending.js')
+  script(src='js/trading/profile.js')
+  script(src='js/trading/add.js')

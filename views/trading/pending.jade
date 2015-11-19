@@ -1,0 +1,35 @@
+block pending modal
+  #pendingModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='user1 user2 item1 item2', area-describedby='pending trades')
+    .modal-dialog.modal-lg(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4.modal-title Pending Trades
+        .modal-body
+          table.table.table-striped.table-hover.table-condensed.table-responsive
+            tr
+              th.col-md-2 Trade initiated by
+              th.col-md-2 with
+              th.col-md-2 Desired item
+              th.col-md-2 Offered item
+            tr
+              td littleFinger
+              td 
+
+
+
+            //- form.form-horizontal
+              .row.form-group
+                label.col-sm-4.control-label(for='username') Item
+                .col-sm-4
+                  input#itemName.form-control(type='text', placeholder='Item', autofocus)
+              .row.form-group
+                label.col-sm-4.control-label(for='text') Description
+                .col-sm-4
+                  input#itemDescription.form-control(type='text', placeholder='description')
+              #emptyFormWarn.warning.message All fields must be filled
+              #tryAgain.warning.message Error.  Please try again.
+        .modal-footer
+          button.cancel.btn.btn-default(type='button', data-dismiss='modal') Cancel
+          button#saveNewItem.btn.btn-primary(type='button') Save

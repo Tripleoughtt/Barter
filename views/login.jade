@@ -32,6 +32,7 @@ block content
                   input#confirmPassword.form-control(type='password', placeholder='password')
               #registerEmptyFormWarn.warning.message All fields must be filled
               #passwordMatchWarn.warning.message Passwords must match
+              #tryAgain.warning.message Error.  Please try again.
               #success.message Registration successful!
         .modal-footer
           button.cancel.btn.btn-default(type='button', data-dismiss='modal') Cancel
@@ -55,6 +56,7 @@ block content
                 .col-sm-4
                   input#loginPassword.form-control(type='password', placeholder='password')
               #loginEmptyFormWarn.warning.message All fields must be filled
+              #tryAgain.warning.message Error.  Please try again.
         .modal-footer
           button.cancel.btn.btn-default(type='button', data-dismiss='modal') Cancel
           button#saveEdit.btn.btn-primary(type='button') Login

@@ -43,6 +43,7 @@ function registerNewUser() {
     })
     .fail(function(err) {
       console.error(err);
+      $('#tryAgain').show();
     });
   }
 }
@@ -73,6 +74,7 @@ function loginUser() {
       $('#username').val('');
       $('#password').val('');
       console.error(err);
+      $('#tryAgain').show();
     });
   }
 }

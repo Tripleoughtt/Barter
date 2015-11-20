@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var jwt = require('jwt-simple');
 
-var api_key = 'key-acd11a66f6a29644069caf837c6a09a1';
-var domain = 'rgautereaux.com';
+var api_key = process.env.API_KEY;
+var domain = process.env.DOMAIN;
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 var User;

@@ -1,7 +1,7 @@
 {
   "name": "barter",
   "version": "1.0.0",
-  "description": "",
+  "description": "This simple app allows users to exchange items",
   "main": "app.js",
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -18,13 +18,15 @@
 },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node /bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower i"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tripleoughtt/Barter.git"
   },
-  "author": "",
+  "author": "Virsaviya Efraim Rich Gauteraux",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Tripleoughtt/Barter/issues"

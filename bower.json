@@ -1,10 +1,10 @@
 {
-  "name": "barter",
+  "name": "better-barterin",
   "homepage": "https://github.com/Tripleoughtt/Barter",
-  "description": "",
+  "description": "A simple app that allows users to exchange items",
   "main": "",
   "moduleType": [],
-  "license": "MIT",
+  "license": "",
   "ignore": [
     "**/.*",
     "node_modules",

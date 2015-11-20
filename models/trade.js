@@ -20,13 +20,11 @@ tradeSchema.statics.newTrade = (req, res, cb) => {
   let trade = new Trade();
   let tradeInfo = req.body
   let payload = jwt.decode(req.cookies.token, process.env.JWT_SECRET)
-  console.log('newTrade id', payload._id)
   User.find({"username": tradeInfo.respondingUser}, function(err, respondingUser){
     trade.respondingUser = respondingUser[0]._id;
     trade.requestingUser = payload._id;
     Item.find({owner: trade.requestingUser, itemName: tradeInfo.offeredItem}, function(err, itemForTrade){
       trade.responseItem = (itemForTrade[0]._id);
-
       Item.find({owner: trade.respondingUser, itemName: tradeInfo.requestedItem}, function(err, desiredItem){
         trade.requestedItem = desiredItem[0]._id;
         trade.save((err, savedTrade) => {
@@ -44,7 +42,6 @@ tradeSchema.methods.makeTrade = (trade, cb) => {
   console.log('initial trade: ', trade)
   Item.findByIdAndUpdate(trade.requestedItem, {$set: {owner: trade.requestingUser}}).populate('owner', 'username').exec((err, requestMatch) => {
     if (err) return console.error(err);
-    console.log(requestMatch);
     Item.findByIdAndUpdate(trade.responseItem, {$set: {owner: trade.respondingUser}}).populate('owner', 'username').exec((err, responseMatch) => {
       if (err) return console.error(err);
       console.log(responseMatch);
@@ -53,24 +50,6 @@ tradeSchema.methods.makeTrade = (trade, cb) => {
   })
 }
 
-
 Trade = mongoose.model('Trade', tradeSchema);
 
 module.exports = Trade;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -10,7 +10,6 @@ function init() {
 }
 
 function openPendingModal() {
-  console.log('pending clicked');
   $('#pendingModal').modal('show');
 }
 
@@ -28,8 +27,6 @@ function cancelTrade(){
   })
 }
 
-
-
 function acceptTrade(){
   var $removeRow = $(this).closest('.trade');
   var id = ($(this).attr('id'));
@@ -37,12 +34,8 @@ function acceptTrade(){
   $.post('/trading/makeTrade', data)
   .done(function(data){
     $removeRow.remove()
-    // $(`*[data-user='${data[0]._id}']`).remove()
-    // $(`*[data-user='${data[1]._id}']`).remove()
     $(`#${data[0]._id}`).remove();
     $(`#${data[1]._id}`).remove();
-    console.log('pub item name ', data[0]._id);
-    console.log('pub item owner ', data[1]._id);
 
     var $myItemsTr = $('#myItemsTemplate').clone();
     $myItemsTr.removeAttr('id');
@@ -55,17 +48,6 @@ function acceptTrade(){
     $publicItemsTr.find('.publicItemOwner').text(data[1].owner.username);
     $publicItemsTr.prependTo('#publicItemsTable');
 
-
-
-
     $('#pendingModal').modal('hide');
   })
 }
-
-
-
-
-
-
-
-

@@ -8,15 +8,12 @@ function init() {
 }
 
 function openAddModal() {
-  console.log('add modal clicked')
   $('#addModal').modal('show');
 }
 
 function saveNewItem() {
   var item = {};
   item.name = $('#itemName').val(); 
-  // itemInfo.item.description = $('#itemDescription').val(); 
-  console.log(item);
   if (item.name === '') {
     $('.message').hide();
     $('#emptyFormWarn').show();
@@ -25,8 +22,6 @@ function saveNewItem() {
     $('.message').hide();
     $.post('trading/addItem', item)
     .done(function(savedItem) {
-      console.log('new item saved ', savedItem);
-
       var $tr = $('<tr>')
 
       var $myItem = $('<div>').addClass('myItem').text(savedItem.itemName);
@@ -44,7 +39,6 @@ function saveNewItem() {
 
       $tr.append($itemTd, $forTradeTd, $offerTd, $trashTd);
       $('#myItemsTable').prepend($tr);
-
       $('#addModal').modal('hide');
     })
     .fail(function(err) {
@@ -53,9 +47,3 @@ function saveNewItem() {
     })
   }
 }
-
-
-
-
-
-

@@ -9,7 +9,6 @@ function init() {
 }
 
 function openProfileModal() {
-  console.log('profile clicked');
   $('#profileModal').modal('show');
 }
 
@@ -18,6 +17,7 @@ function editBio() {
   $('#editBio').show();
 }
 
+// backend for this was not created
 function saveBioEdit() {
   var bio = $('#editBio').val(); 
   $.post('/userProfile', bio)

@@ -26,7 +26,6 @@ function removeItem(){
   var itemName = $toRemove.find('.myItem').text();
   $.post('/trading/removeItem', {itemName: itemName})
   .done(function(data){
-    console.log('remove item ', data);
     $toRemove.remove();
   })
 }
@@ -36,10 +35,8 @@ function tradeInit() {
   data.requestedItem = $('.request:checked').closest('tr').find('.publicItemName').text();
   data.respondingUser = $('.request:checked').closest('tr').find('.publicItemOwner').text();
   data.offeredItem = $('.offer:checked').closest('tr').find('.myItem').text();
-  console.log('pre post data ', data);
   $.post('/trading/newTrade', data)
   .done(function(tradeComplete){
-    console.log('trade init ', tradeComplete);
 
     var $cancel = $('<div>').addClass('btn btn-responsive btn-info cancelTrade').attr('id', tradeComplete._id).text('Cancel');
     var $row = $('<div>').addClass('row').append($cancel);
@@ -60,8 +57,6 @@ function tradeInit() {
     console.error('err? ', err);
   })
 };
-
-
 
 setInterval(() => {
   if ($('.request:checked')[0] && $('.offer:checked')[0]){

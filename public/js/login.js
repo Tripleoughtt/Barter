@@ -79,6 +79,7 @@ function loginUser() {
   }
 }
 
+
 function cancel() {
   $('input').val('');
   $('.message').hide();

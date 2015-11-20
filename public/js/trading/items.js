@@ -14,6 +14,7 @@ function changeTradeStatus() {
   item.itemName = ($(this).closest('tr').find('.myItem').text());
   $.post('trading/notForTrade', item)
   .done(function(changedTradeStatus) {
+    console.log('changed trade status ', changedTradeStatus)
   })
   .fail(function(err) {
     console.error(err);
@@ -25,7 +26,7 @@ function removeItem(){
   var itemName = $toRemove.find('.myItem').text();
   $.post('/trading/removeItem', {itemName: itemName})
   .done(function(data){
-    console.log(data);
+    console.log('remove item ', data);
     $toRemove.remove();
   })
 }
@@ -35,20 +36,28 @@ function tradeInit() {
   data.requestedItem = $('.request:checked').closest('tr').find('.publicItemName').text();
   data.respondingUser = $('.request:checked').closest('tr').find('.publicItemOwner').text();
   data.offeredItem = $('.offer:checked').closest('tr').find('.myItem').text();
-  console.log(data);
+  console.log('pre post data ', data);
   $.post('/trading/newTrade', data)
   .done(function(tradeComplete){
-    console.log('trade complete', tradeComplete);
+    console.log('trade init ', tradeComplete);
 
-    var $cancel = $('<div>').addClass('btn btn-responsive btn-info cancelTrade pull-right').
+    var $cancel = $('<div>').addClass('btn btn-responsive btn-info cancelTrade').attr('id', tradeComplete._id).text('Cancel');
+    var $row = $('<div>').addClass('row').append($cancel);
+    var $btnContainer = $('<div>').addClass('btnContainer').append($row);
 
+    var offer = `${tradeComplete.requestingUser.username} wants to offer ${tradeComplete.responseItem.itemName} for ${tradeComplete.respondingUser.username}'s ${tradeComplete.requestedItem.itemName}.`
+    var $pendingString = $('<div>').addClass('pendingString col-md-9').text(offer);
 
-    // var $thisRow = $('<div class="row"><h4 class="col-md-10 statement"><div class="col md 1"><div class="btn btn-responsive btn-info cancelTrade pull-right">Cancel?</div></div></h4></div>')
-    // $thisRow.prependTo('#pendings')
-    // $('.statement').text(`Test string`)
+    var $tradeRow = $('<div>').addClass('trade row').append($pendingString, $btnContainer);
+    $('#pendings').append($tradeRow);
+
+    $('#offerConfirmationModal').modal('show');
+    setTimeout(function() {
+      $('#offerConfirmationModal').modal('hide')
+    }, 1500)
   })
   .fail(function(err){
-    console.error(err);
+    console.error('err? ', err);
   })
 };
 
@@ -60,7 +69,7 @@ function cancelTrade(){
     data: data
   })
   .done(function(data){
-    console.log(data)
+    console.log('cancel trade ', data)
   })
 }
 
@@ -69,7 +78,7 @@ function acceptTrade(){
   var data = {_id: id};
   $.post('/trading/makeTrade', data)
   .done(function(data){
-    console.log(data)
+    console.log('accept trade ', data)
   })
 }
 

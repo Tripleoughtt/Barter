@@ -2,11 +2,8 @@ extends ../layout.jade
 
 block css
   link(rel='stylesheet', href="stylesheets/trading/trading.css")
-  link(rel='stylesheet', href="stylesheets/trading/add.css")
-  link(rel='stylesheet', href="stylesheets/trading/pending.css")
   link(rel='stylesheet', href="stylesheets/trading/profile.css")
   link(rel='stylesheet', href="stylesheets/trading/myTrades.css")
-  link(rel='stylesheet', href="stylesheets/trading/publicTrades.css")
 
 block nav 
   li 
@@ -22,18 +19,19 @@ block content
   include add
   include pending
   include profile
+  include offerConfirmation
 
   .container
     .row
-      #myItems.col-md-6
-        .well
-          include myItems
       #publicItems.col-md-6
         .well
           include publicItems
+      #myItems.col-md-6
+        .well
+          include myItems
 block js
   script(src='js/trading/trading.js')
+  script(src='js/trading/add.js')
+  script(src='js/trading/items.js')
   script(src='js/trading/pending.js')
   script(src='js/trading/profile.js')
-  script(src='js/trading/items.js')
-  script(src='js/trading/add.js')

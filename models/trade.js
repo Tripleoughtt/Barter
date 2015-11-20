@@ -15,7 +15,7 @@ let tradeSchema = mongoose.Schema({
   
 });
 
-tradeSchema.statics.newTrade = (req, cb) => {
+tradeSchema.statics.newTrade = (req, res, cb) => {
   console.log("Trade info: ", req.body)
   let trade = new Trade();
   let tradeInfo = req.body
@@ -30,7 +30,10 @@ tradeSchema.statics.newTrade = (req, cb) => {
       Item.find({owner: trade.respondingUser, itemName: tradeInfo.requestedItem}, function(err, desiredItem){
         trade.requestedItem = desiredItem[0]._id;
         trade.save((err, savedTrade) => {
-          console.log('model newTrade saved Trade ', savedTrade);
+          Trade.findById(savedTrade._id, (err, foundTrade) => {
+            console.log('model newTrade saved Trade ', foundTrade);
+            res.send(foundTrade);
+          }).populate('requestingUser respondingUser requestedItem responseItem', "username itemName")
         })
       })
     })

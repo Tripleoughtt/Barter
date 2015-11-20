@@ -1,12 +1,9 @@
 block my items
   .row
-    .col-md-9
+    .sectionTitle.col-md-12
       .row
-        h3.col-md-12 My Items
-      h4.col-md-12 Select an Item to Offer for Trade!
-    .col-md-2
-    .row
-      button(disabled).btn.btn-responsive.btn-info#trade Traaaaade!!!
+        .col-md-12 My Items
+        .subscript.col-md-12 Step #2. Select an item to offer for barter.
   .row
     table.table.table-striped.table-hover.table-condensed.table-responsive
       tr
@@ -26,4 +23,7 @@ block my items
                 input.offer(type="radio" name="offer") 
               td
                 i.fa.fa-trash.fa-md.deleteItem  
+  .row
+    .subscript.col-md-12 Step #3. Send barter request to owner of desired item.
+    button(disabled).btn.btn-responsive.btn-info#trade Make Barter Offer
 

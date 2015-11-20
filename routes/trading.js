@@ -32,10 +32,10 @@ router.get('/', authMiddleware, function(req, res, next) {
 
 router.post('/newTrade', (req, res) => {
   console.log(req.body)
-  Trade.newTrade(req, function(err, savedTrade) {
+  Trade.newTrade(req, res, function(err, savedTrade) {
     if (err) return console.error(err);
-    console.log(savedTrade);
-    res.send(savedTrade)
+    console.log('saved trade in route ', savedTrade);
+    // res.send(savedTrade)
   })
 })
 

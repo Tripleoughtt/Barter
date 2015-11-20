@@ -1,9 +1,6 @@
 textarea {
   min-height: 300px;
 }
-h3 {
-  margin: 10px;
-}
 
 .well {
   min-height: 80vh;
@@ -18,36 +15,58 @@ h3 {
   color: #d68539;
 } 
 
-.item {
-  text-align: left;
+.sectionTitle {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
 
+.trade {
+  background-color: #464545;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  text-align: left;
 }
 
 .options {
   text-align: center;
 }
-.myItem {
-  vertical-align: center;
-  font-size: 20px;
-}
-.trade {
-  text-align: left;
-}
-/*.trade > h4 {
-  vertical-align: center;
-}*/
-.cancelTrade, .acceptTrade {
-  margin: 5px;
-  /*padding: 0px;*/
+
+.trade > div {
+  padding: 0;
 }
 
-div {
-  /*border: 1px solid red;*/
+.myItem, .publicItemName, .publicItemOwner {
+  text-align: left;
+  vertical-align: center;
+  font-size: 16px;
 }
 
 #trade {
   cursor: auto;
 }
+
+.acceptTrade, .declineTrade, .cancelTrade {
+  padding: 5px;
+}
+
+.pendingString {
+  margin: 16px;
+}
+
+.modal-body {
+  overflow-y: auto;
+}
+
+
+
+
+div {
+  /*border: 1px solid red;*/
+}
+
+
+
 
 
 

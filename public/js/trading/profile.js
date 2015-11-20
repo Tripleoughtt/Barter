@@ -5,7 +5,7 @@ $(document).ready(init);
 function init() {
   $('#profile').on('click', openProfileModal);
   $('#edit').on('click', editBio);
-  $('#sameBioEdit').on('click', saveBioEdit);
+  $('#saveBioEdit').on('click', saveBioEdit);
 }
 
 function openProfileModal() {

@@ -57,10 +57,10 @@ userSchema.statics.register = function(user, cb) {
       // Send out registration email:
       
       var data = {
-        from: 'Bitchin Bartering <postmaster@bitchinBartering.net>',
+        from: `Better Barterin' <postmaster@bitchinBartering.net>`,
         to: savedUser.email,
-        subject: `Welcome To Bitchin Bartering ${savedUser.username}!`,
-        text: `Welcome to Bitchin' Bartering ${savedUser.username}, We're glad to have you!!!!`
+        subject: `Welcome To Better Barterin' ${savedUser.username}!`,
+        text: `Welcome to Better Barterin' ${savedUser.username}, We're glad to have you!!`
       }
 
       mailgun.messages().send(data, function (error, body) {

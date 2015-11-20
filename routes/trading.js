@@ -44,11 +44,11 @@ router.post('/makeTrade', (req, res) => {
     trade.makeTrade(trade, (err, tradeComplete) => {
       if (err) return console.error(err);
       console.log(tradeComplete);
-      Trade.findByIdAndRemove(req.body._id, (err, removedTrade) => {
-        if (err) return console.error(err);
-        console.log(removedTrade);
-        res.send(tradeComplete)
-      })
+        Trade.findByIdAndRemove(req.body._id, (err, removedTrade) => {
+          if (err) return console.error(err);
+          console.log(removedTrade);
+          res.send(tradeComplete)
+        })
     })
   }) 
 })

@@ -14,7 +14,7 @@ block my items
       tbody#myItemsTable      
         if data.myItems
           each item in data.myItems
-            tr
+            tr(id=item._id)
               td.item
                 .myItem= item.itemName
               td
@@ -22,7 +22,16 @@ block my items
               td
                 input.offer(type="radio" name="offer") 
               td
-                i.fa.fa-trash.fa-md.deleteItem  
+                i.fa.fa-trash.fa-md.deleteItem
+        tr#myItemsTemplate
+          td.item
+            .myItem
+          td
+            input.forTrade(type="checkbox" checked)
+          td
+            input.offer(type="radio" name="offer") 
+          td
+            i.fa.fa-trash.fa-md.deleteItem 
   .row
     .subscript.col-md-12 Step #3. Send barter request to owner of desired item.
     button(disabled).btn.btn-responsive.btn-info#trade Make Barter Offer

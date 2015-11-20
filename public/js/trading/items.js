@@ -54,33 +54,14 @@ function tradeInit() {
     $('#offerConfirmationModal').modal('show');
     setTimeout(function() {
       $('#offerConfirmationModal').modal('hide')
-    }, 1500)
+    }, 1000)
   })
   .fail(function(err){
     console.error('err? ', err);
   })
 };
 
-function cancelTrade(){
-  var data = {_id: $(this).attr('id')}
-  $.ajax({
-    type: "POST",
-    url: '/trading/deleteTrade',
-    data: data
-  })
-  .done(function(data){
-    console.log('cancel trade ', data)
-  })
-}
 
-function acceptTrade(){
-  var id = ($(this).attr('id'));
-  var data = {_id: id};
-  $.post('/trading/makeTrade', data)
-  .done(function(data){
-    console.log('accept trade ', data)
-  })
-}
 
 setInterval(() => {
   if ($('.request:checked')[0] && $('.offer:checked')[0]){

@@ -42,10 +42,10 @@ tradeSchema.statics.newTrade = (req, res, cb) => {
 
 tradeSchema.methods.makeTrade = (trade, cb) => {
   console.log('initial trade: ', trade)
-  Item.findByIdAndUpdate(trade.requestedItem, {$set: {owner: trade.requestingUser}}, (err, requestMatch) => {
+  Item.findByIdAndUpdate(trade.requestedItem, {$set: {owner: trade.requestingUser}}).populate('owner', 'username').exec((err, requestMatch) => {
     if (err) return console.error(err);
     console.log(requestMatch);
-    Item.findByIdAndUpdate(trade.responseItem, {$set: {owner: trade.respondingUser}}, (err, responseMatch) => {
+    Item.findByIdAndUpdate(trade.responseItem, {$set: {owner: trade.respondingUser}}).populate('owner', 'username').exec((err, responseMatch) => {
       if (err) return console.error(err);
       console.log(responseMatch);
       cb(err, [requestMatch, responseMatch]);

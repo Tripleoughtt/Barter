@@ -1,6 +1,9 @@
 textarea {
   min-height: 300px;
 }
+#publicItemsTemplate, #myItemsTemplate {
+  display: none;
+}
 
 .well {
   min-height: 80vh;

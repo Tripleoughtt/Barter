@@ -64,6 +64,7 @@ function loginUser() {
   } else {
     $.post('/login', user)
     .done(function(data) {
+      console.log('done')
       if (data.redirect) {
         window.location = data.redirect
       }
@@ -73,8 +74,9 @@ function loginUser() {
     .fail(function(err) {
       $('#username').val('');
       $('#password').val('');
-      console.error(err);
+      $('#incorrectLogin').show();
       $('#tryAgain').show();
+      console.error(err);
     });
   }
 }

@@ -5,4 +5,4 @@ This simple app allows a user to create and register a login, then securely log 
 
 The app is live on [Heroku](https://better-bartering.herokuapp.com/)
 
-> updated: November 19, 2015
+> updated: November 27, 2015
